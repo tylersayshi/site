@@ -116,6 +116,7 @@ body {
 
 .links {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   margin-top: 1.25rem;
@@ -123,8 +124,8 @@ body {
 }
 
 .links svg {
-  height: 4vh;
-  width: 4vh;
+  height: 2.5rem;
+  width: 2.5rem;
   vertical-align: middle;
 }
 
