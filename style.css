@@ -128,6 +128,26 @@ body {
   vertical-align: middle;
 }
 
+body a[title="bluesky"]:hover {
+  color: #0085FF;
+}
+
+body a.semble-link:hover {
+  color: #FF6400;
+}
+
+.semble-link svg {
+  width: auto;
+}
+
+.leaflet-link svg {
+  width: auto;
+}
+
+body a.leaflet-link:hover {
+  color: #639431;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: var(--background-dark);
@@ -151,17 +171,21 @@ body {
     box-shadow: 0 2px 4px var(--shadow-dark);
   }
 
+  body a[title="bluesky"]:hover {
+    color: #0085FF;
+  }
+
   body a.semble-link:hover {
     color: #FF6400;
   }
-}
 
-body a.semble-link:hover {
-  color: #FF6400;
-}
+  body a.leaflet-link:hover {
+    color: #639431;
+  }
 
-.semble-link svg {
-  width: auto;
+  .leaflet-inner {
+    fill: var(--background-dark);
+  }
 }
 
 .bluesky-flutter {
