@@ -16,10 +16,6 @@
  --font-stack: Chalkboard, ChalkboardSE-Regular, ChalkboardSE, ChalkDuster, Comic Sans MS, comic-sans, sans-serif;
 }
 
-html {
- overscroll-behavior: none;
-}
-
 h1 {
  font-size: 3rem;
 }
@@ -122,8 +118,8 @@ body {
  flex-wrap: wrap;
  justify-content: center;
  align-items: center;
- margin-top: 1.25rem;
- gap: 2rem;
+ margin: 0 1.25rem;
+ gap: 1.25rem;
 }
 
 .links svg {
