@@ -91,15 +91,19 @@ body .shadow {
 }
 
 svg.logo {
- height: 60vh;
- width: 60vh;
- margin-bottom: -15vh;
- margin-top: -10vh;
+ --logo-size: min(60vh, 90vw);
+ height: var(--logo-size);
+ width: var(--logo-size);
+ max-width: 100%;
+ /* the drawing has blank space above and below; pull neighbours into it */
+ margin-top: calc(var(--logo-size) * -0.17);
+ margin-bottom: calc(var(--logo-size) * -0.25);
 }
 
 html {
  height: 100%;
  width: 100%;
+ overflow-x: clip;
 }
 
 body {
@@ -293,6 +297,10 @@ dialog#email-dialog {
  max-width: min(90vw, 26rem);
  box-shadow: 0 8px 24px var(--shadow-light);
  transform: rotate(-1.5deg);
+}
+
+dialog#email-dialog:focus {
+ outline: none;
 }
 
 dialog#email-dialog::backdrop {
