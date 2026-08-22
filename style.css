@@ -18,6 +18,7 @@
 
 h1 {
  font-size: 3rem;
+ margin-top: 0.5rem;
 }
 
 a {
@@ -92,7 +93,7 @@ body .shadow {
 svg.logo {
  height: 60vh;
  width: 60vh;
- margin-bottom: -10vh;
+ margin-bottom: -15vh;
  margin-top: -10vh;
 }
 
@@ -128,16 +129,44 @@ body {
  vertical-align: middle;
 }
 
+.links a,
+.links button {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 0.35rem;
+ text-decoration: none;
+}
+
+.label {
+ display: inline-block;
+ font-size: 0.8rem;
+ line-height: 1;
+ transform: rotate(-7deg);
+ transition: transform 200ms;
+}
+
+.links > :nth-child(even) .label {
+ transform: rotate(6deg);
+}
+
+.links > :hover .label,
+.links > :focus-visible .label {
+ transform: rotate(0deg) scale(1.1);
+}
+
+h2 {
+ font-size: 1.5rem;
+ margin: 2rem 0 0.75rem;
+}
+
+.chalky-link img {
+ height: 4.5rem;
+ width: auto;
+}
+
 body a[title="bluesky"]:hover {
  color: #0085ff;
-}
-
-body a.semble-link:hover {
- color: #ff6400;
-}
-
-.semble-link svg {
- width: auto;
 }
 
 .leaflet-link svg {
@@ -173,10 +202,6 @@ body a.leaflet-link:hover {
 
  body a[title="bluesky"]:hover {
   color: #0085ff;
- }
-
- body a.semble-link:hover {
-  color: #ff6400;
  }
 
  body a.leaflet-link:hover {
