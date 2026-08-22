@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Hi! I'm Tyler" />
     <link rel="icon" type="image/x-icon" href="./favicon.ico" />
-    <link rel="stylesheet" href="./style.css?v=2" />
+    <link rel="stylesheet" href="./style.css?v=3" />
   </head>
   <body>
     <svg
@@ -125,11 +125,75 @@
         <span class="label">chalky.town</span>
       </a>
     </div>
+    <dialog id="email-dialog" aria-label="email address">
+      <button type="button" class="dialog-close" id="email-close" title="close" aria-label="close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+      <div class="email-row">
+        <code id="email-address"></code>
+        <button type="button" id="email-copy" class="copy-button" title="copy">
+          <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="9" y="9" width="11" height="11" rx="2" />
+            <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" />
+          </svg>
+          <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12l5 5L20 7" />
+          </svg>
+          <span class="copy-label">copy</span>
+        </button>
+      </div>
+    </dialog>
   </body>
-  <script lang="javascript">
-    const mailButton = document.getElementById("mail");
-    mailButton.addEventListener("click", () => {
-      window.alert("hi" + "@" + window.location.hostname);
+  <script>
+    const dialog = document.getElementById("email-dialog");
+    const addressEl = document.getElementById("email-address");
+    const copyButton = document.getElementById("email-copy");
+    const copyLabel = copyButton.querySelector(".copy-label");
+    const address = "hi" + "@" + window.location.hostname;
+    let copiedTimer;
+
+    const resetCopied = () => {
+      copyButton.classList.remove("copied");
+      copyLabel.textContent = "copy";
+      clearTimeout(copiedTimer);
+    };
+
+    document.getElementById("mail").addEventListener("click", () => {
+      addressEl.textContent = address;
+      resetCopied();
+      dialog.showModal();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && dialog.open) dialog.close();
+    });
+
+    document.getElementById("email-close").addEventListener("click", () => dialog.close());
+
+    // click-away: a click whose target is the dialog itself landed on the backdrop
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    dialog.addEventListener("close", resetCopied);
+
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(address);
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(addressEl);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        document.execCommand("copy");
+      }
+      copyButton.classList.add("copied");
+      copyLabel.textContent = "copied";
+      clearTimeout(copiedTimer);
+      copiedTimer = setTimeout(resetCopied, 2000);
     });
   </script>
 </html>
